@@ -1,0 +1,90 @@
+$tokens: (
+  "breakpoints": (
+    "mobile": 360px,
+    "mobile-lg": 500px,
+    "tablet-sm": 640px,
+    "tablet": 768px,
+    "desktop": 960px,
+    "desktop-lg": 1280px,
+  )
+);
+
+:root {
+  // Layout
+  --content-width: 58rem;
+
+  // Narrower column for actual reading content (article body, page text), nested inside the wider
+  // --content-width frame so long lines stay comfortable to read even though the site itself is wide.
+  --prose-width: 47.5rem;
+  --header-height: 4rem;
+  --radius: 0.5rem;
+
+  // Typography
+  --font-sans: "Source Sans 3", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial, sans-serif;
+  --font-mono: "Source Code Pro", ui-monospace, sfmono-regular, "SF Mono", menlo, consolas, "Liberation Mono",
+    monospace;
+
+  // Base reading text size, fluid between 18px (375px viewport) and 20px (960px+ viewport) —
+  // matches the body text scale used on senthilnayagan.net.
+  --font-size-base: clamp(1.125rem, 1.045rem + 0.34vw, 1.25rem);
+
+  // Light theme (default). Strictly monochrome: no accent hue anywhere in the UI — "accent" and
+  // "visited" both resolve to the same black used for body text, just a different weight/underline
+  // to distinguish state instead of color.
+  --color-bg: #fff;
+  --color-bg-raised: #f4f5f7;
+  --color-text: #1a1d23;
+  --color-text-secondary: #565d6b;
+  --color-border: #e3e5e9;
+  --color-accent: var(--color-text);
+  --color-link-visited: var(--color-text);
+  --color-code-bg: #f4f5f7;
+  --color-code-text: #1a1d23;
+  --color-shadow: rgb(20 22 26 / 8%);
+
+  // The one deliberate exception to the monochrome rule above: a traditional rangoli festival
+  // palette for the homepage's mandala ornament only (src/_pages/index.liquid) — turmeric yellow
+  // for the inner ring, rani pink for the middle ring, saffron for the outer ring, deep maroon-red
+  // for the center. A classic Indian floral color combination, kept to this one small ornament so
+  // it doesn't compete with the rest of the site's restraint.
+  --color-ornament: #e8b923;
+  --color-ornament-secondary: #d1477a;
+  --color-ornament-tertiary: #a52439;
+  --color-ornament-quaternary: #e8821e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #13151a;
+    --color-bg-raised: #1b1e25;
+    --color-text: #e7e9ec;
+    --color-text-secondary: #a3aab6;
+    --color-border: #2b2f38;
+    --color-accent: var(--color-text);
+    --color-link-visited: var(--color-text);
+    --color-code-bg: #1b1e25;
+    --color-code-text: #e7e9ec;
+    --color-shadow: rgb(0 0 0 / 40%);
+    --color-ornament: #f0c94a;
+    --color-ornament-secondary: #e0629a;
+    --color-ornament-tertiary: #c0435a;
+    --color-ornament-quaternary: #f2953f;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #13151a;
+  --color-bg-raised: #1b1e25;
+  --color-text: #e7e9ec;
+  --color-text-secondary: #a3aab6;
+  --color-border: #2b2f38;
+  --color-accent: var(--color-text);
+  --color-link-visited: var(--color-text);
+  --color-code-bg: #1b1e25;
+  --color-code-text: #e7e9ec;
+  --color-shadow: rgb(0 0 0 / 40%);
+  --color-ornament: #f0c94a;
+  --color-ornament-secondary: #e0629a;
+  --color-ornament-tertiary: #c0435a;
+  --color-ornament-quaternary: #f2953f;
+}

@@ -1,0 +1,160 @@
+@use "../mixins" as *;
+
+// Native cross-document view transitions (e.g. Chrome 111+): animates shared elements — like a post
+// title carrying over from its preview card to the article page — between full page navigations.
+// Browsers without support just navigate normally, no fallback needed.
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+html {
+  color-scheme: light dark;
+
+  // Applies to the back-to-top button's window.scrollTo() call. Overridden back to `auto` under
+  // prefers-reduced-motion by the global rule in global/_reset.scss.
+  scroll-behavior: smooth;
+}
+
+// Now that the header is sticky (position: sticky; top: 0), jumping straight to an anchor — a TOC
+// link, a footnote reference, the skip-link — would otherwise land the target right underneath it.
+// This nudges every anchor-jump target down by the header's height plus a little breathing room.
+[id] {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  font-weight: 700;
+
+  // `balance` shrinks every line to match the others, which for a heading shorter than its
+  // container (true almost everywhere on this site — page titles, preview cards, in-article
+  // headings) leaves visible unused width instead of just filling the line and wrapping the
+  // rest. `pretty` avoids that, but it's a holistic algorithm — it can still re-optimize break
+  // points across the WHOLE heading whenever the content changes, which was visibly reshuffling
+  // where earlier lines broke just from the " #" that .header-anchor:hover::after appends after
+  // the last word. Plain `wrap` (CSS's actual initial value, set explicitly here to document the
+  // choice rather than rely on it being the default) is a simple greedy fill: pack each line as
+  // full as possible, wrap only the overflow, never reconsider earlier lines — less protection
+  // against a lone orphan word on a rare 3-line heading, but stable and predictable everywhere else.
+  text-wrap: wrap;
+}
+
+// An explicit weight, not the browser default `strong { font-weight: bolder }` — that relative
+// keyword doesn't reliably resolve against this variable font's weight axis in every ambient
+// context (e.g. bold text inside an italicized blockquote rendered with no visible weight
+// difference at all).
+strong,
+b {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+}
+
+h2 {
+  font-size: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--color-accent);
+  text-underline-offset: 0.15em;
+}
+
+a:visited {
+  color: var(--color-link-visited);
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration-thickness: 0.15em;
+}
+
+// Any link that opens in a new tab automatically gets a small "opens in a new window" icon after it —
+// add target="_blank" (and rel="noopener") to a link anywhere on the site and this applies on its own.
+// Add class="no-icon" to opt a specific link out.
+a[target="_blank"]:not(.no-icon)::after {
+  content: "";
+  display: inline-block;
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: 0.25em;
+  background-color: currentcolor;
+  mask-image: url("/assets/images/icons/external-link.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  vertical-align: middle;
+
+  // No autoprefixer in this build; Safari still needs the prefixed mask properties.
+  -webkit-mask-image: url("/assets/images/icons/external-link.svg");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.skip-link {
+  @include visually-hidden;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  clip: auto;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+main {
+  display: block;
+  padding-block: 2.5rem 4rem;
+}

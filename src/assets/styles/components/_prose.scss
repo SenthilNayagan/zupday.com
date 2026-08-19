@@ -1,0 +1,330 @@
+.prose {
+  max-width: var(--prose-width);
+  margin-inline: auto;
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+// Content headings start at h1 (the post title itself is rendered outside .prose, now sized up
+// to clamp(2.25rem, ..., 3.5rem) — see .post__title/.page__title/.intro__title in _page.scss), so
+// this whole scale sits a step below that while keeping h1 > h2 > h3 > h4 clearly distinct from
+// each other. Each step is roughly a ~1.25x jump from the next — close to the browser's own
+// unstyled h1/h2/h3/h4 UA ratio (2em/1.5em/1.17em/1em off the body font-size), which is what
+// senthilnayagan.net and aleksandrhovhannisyan.com both actually render with (neither overrides
+// heading font-size at all inside article content — they just inherit that native cascade). The
+// previous scale here compressed h1 and h2 to within 4px of each other at the max breakpoint,
+// which read as barely-there hierarchy; widening the steps is the fix, not a smaller h1.
+// Margins are fixed rem values here, not `em` — `em` resolves against each heading's OWN
+// font-size, so a bigger heading's margin-top compounds right along with it (h1 at 2.75rem would
+// get a 5.5rem gap above it, nearly double h4's). Rem keeps the gap-before/gap-after moderate and
+// consistent across levels instead of ballooning with size.
+.prose h1 {
+  font-size: clamp(2.25rem, 1.95rem + 1.25vw, 2.75rem);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose h2 {
+  font-size: clamp(1.75rem, 1.55rem + 0.85vw, 2.125rem);
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose h3 {
+  font-size: clamp(1.4375rem, 1.3rem + 0.5vw, 1.625rem);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose h4 {
+  font-size: clamp(1.1875rem, 1.1rem + 0.3vw, 1.3125rem);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose h1 .header-anchor,
+.prose h2 .header-anchor,
+.prose h3 .header-anchor,
+.prose h4 .header-anchor {
+  color: inherit;
+  text-decoration: none;
+}
+
+.prose h1 .header-anchor:hover::after,
+.prose h2 .header-anchor:hover::after,
+.prose h3 .header-anchor:hover::after,
+.prose h4 .header-anchor:hover::after {
+  content: " #";
+  color: var(--color-accent);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.375em;
+}
+
+.prose blockquote {
+  padding-left: 1em;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.prose img,
+.prose video {
+  // Without this, images render at their native pixel size (eleventy-img sets width/height attributes
+  // to the source's full dimensions, often 1500px+) instead of scaling down to fit the article column.
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.prose figcaption,
+.cover-image figcaption {
+  margin-top: 0.5em;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+// Hand-drawn inline SVG diagrams embedded directly in article content (raw HTML, not run through
+// eleventy-img — these aren't files, they're markup). Boxed like a callout so a diagram reads as a
+// distinct "look at this" moment against the surrounding prose, same idea as .post-aside.
+.prose .diagram {
+  margin: 1.75em auto;
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg-raised);
+  text-align: center;
+}
+
+.prose .diagram svg {
+  width: 100%;
+  height: auto;
+  max-width: 34rem;
+}
+
+.prose .diagram figcaption {
+  margin-top: 0.75em;
+}
+
+.prose figcaption > * + *,
+.cover-image figcaption > * + * {
+  margin-top: 0.25em;
+}
+
+.cover-image figcaption {
+  text-align: center;
+}
+
+// Cover image at the top of a post — deliberately sits outside .post__header/.prose (both capped
+// at --prose-width) so it can fill .post__main's full width and stand out as the post's hero art,
+// rather than matching the size of in-article images.
+.cover-image {
+  margin-bottom: 2rem;
+}
+
+// No max-height/object-fit crop here — cover images often have meaningful content (titles, text)
+// baked in close to the edges, and cropping to a fixed box silently cuts that off. Shown at full
+// natural aspect ratio instead, same as in-article .prose images.
+.cover-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin-block: 2.5em;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375em;
+}
+
+.prose th,
+.prose td {
+  padding: 0.5em 0.75em;
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.prose th {
+  background-color: var(--color-bg-raised);
+}
+
+// Inline code
+.prose :not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  background-color: var(--color-code-bg);
+  color: var(--color-code-text);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+// Code blocks (highlighted via @11ty/eleventy-plugin-syntaxhighlight, a Prism-based, zero-JS transform)
+.prose pre[class*="language-"] {
+  position: relative;
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-code-bg);
+  overflow-x: auto;
+  font-size: 0.875em;
+  line-height: 1.6;
+}
+
+.prose pre[class*="language-"] code {
+  font-family: var(--font-mono);
+  background: none;
+}
+
+// Injected by copy-code.js — one per code block.
+.code-copy {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  opacity: 0.75;
+}
+
+.code-copy:hover,
+.code-copy:focus-visible {
+  opacity: 1;
+  color: var(--color-text);
+}
+
+.code-copy__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.code-copy__icon--check {
+  display: none;
+}
+
+.code-copy.is-copied .code-copy__icon--copy {
+  display: none;
+}
+
+.code-copy.is-copied .code-copy__icon--check {
+  display: block;
+}
+
+.prose .highlight-line {
+  display: block;
+  margin-inline: -1.25rem;
+  padding-inline: 1.25rem;
+  background-color: color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+// Token colors: original mapping, not sourced from any specific Prism theme.
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.token.string,
+.token.attr-value {
+  color: #1a8f5e;
+}
+
+:root[data-theme="dark"] .token.string,
+:root[data-theme="dark"] .token.attr-value {
+  color: #5fd897;
+}
+
+.token.number,
+.token.boolean,
+.token.constant {
+  color: #c2410c;
+}
+
+:root[data-theme="dark"] .token.number,
+:root[data-theme="dark"] .token.boolean,
+:root[data-theme="dark"] .token.constant {
+  color: #ff9a63;
+}
+
+.token.keyword,
+.token.selector,
+.token.tag {
+  color: #9333ea;
+}
+
+:root[data-theme="dark"] .token.keyword,
+:root[data-theme="dark"] .token.selector,
+:root[data-theme="dark"] .token.tag {
+  color: #c493f5;
+}
+
+.token.function,
+.token.class-name {
+  color: #2563eb;
+}
+
+:root[data-theme="dark"] .token.function,
+:root[data-theme="dark"] .token.class-name {
+  color: #7fa6ff;
+}
+
+.token.operator,
+.token.punctuation,
+.token.attr-name {
+  color: var(--color-text-secondary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .token.string,
+  :root:not([data-theme="light"]) .token.attr-value {
+    color: #5fd897;
+  }
+
+  :root:not([data-theme="light"]) .token.number,
+  :root:not([data-theme="light"]) .token.boolean,
+  :root:not([data-theme="light"]) .token.constant {
+    color: #ff9a63;
+  }
+
+  :root:not([data-theme="light"]) .token.keyword,
+  :root:not([data-theme="light"]) .token.selector,
+  :root:not([data-theme="light"]) .token.tag {
+    color: #c493f5;
+  }
+
+  :root:not([data-theme="light"]) .token.function,
+  :root:not([data-theme="light"]) .token.class-name {
+    color: #7fa6ff;
+  }
+}
