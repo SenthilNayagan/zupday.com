@@ -191,10 +191,8 @@
 }
 
 // Straddles the divider at its right end — background-color "erases" the border line directly
-// behind it so the medallion reads as sitting on top of, not crossed by, the rule. Big enough for
-// the two-ring petal/dot detail to actually read as a mandala pattern rather than a smudge, while
-// staying a quiet accent overall. Right-aligned won out over left in a side-by-side comparison.
-// Colors are set per-layer directly on the SVG (var(--color-ornament) and friends), not here.
+// behind it so the medallion reads as sitting on top of, not crossed by, the rule. Right-aligned
+// won out over left in a side-by-side comparison.
 .intro__ornament {
   position: absolute;
   right: 0;

@@ -14,52 +14,9 @@ layout: default
       </p>
     </div>
     {%- comment -%}
-      A rangoli "flower from circles" sitting on the divider below the intro, right-aligned — the
-      traditional Indian rangoli construction where a ring of overlapping circles forms a flower's
-      rounded petals, rather than pointed teardrop shapes. Three rings (8 circles each, one circle
-      defined once per ring and reused via <use> with rotation) plus a center dot: saffron outer,
-      rani pink middle offset 22.5° so it peeks out between the saffron circles, turmeric yellow
-      inner, deep maroon-red center. A classic rangoli festival palette — the site's one deliberate
-      departure from its otherwise monochrome design.
+      A mandala flower medallion sitting on the divider below the intro, right-aligned.
     {%- endcomment -%}
-    <svg class="intro__ornament" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <defs>
-        <circle id="mandala-dot-outer" cx="24" cy="9" r="6.5"/>
-        <circle id="mandala-dot-middle" cx="24" cy="14.5" r="5.5"/>
-        <circle id="mandala-dot-inner" cx="24" cy="19" r="3"/>
-      </defs>
-      <g fill="var(--color-ornament-quaternary)" fill-opacity="0.85">
-        <use href="#mandala-dot-outer"/>
-        <use href="#mandala-dot-outer" transform="rotate(45 24 24)"/>
-        <use href="#mandala-dot-outer" transform="rotate(90 24 24)"/>
-        <use href="#mandala-dot-outer" transform="rotate(135 24 24)"/>
-        <use href="#mandala-dot-outer" transform="rotate(180 24 24)"/>
-        <use href="#mandala-dot-outer" transform="rotate(225 24 24)"/>
-        <use href="#mandala-dot-outer" transform="rotate(270 24 24)"/>
-        <use href="#mandala-dot-outer" transform="rotate(315 24 24)"/>
-      </g>
-      <g fill="var(--color-ornament-secondary)" fill-opacity="0.9">
-        <use href="#mandala-dot-middle" transform="rotate(22.5 24 24)"/>
-        <use href="#mandala-dot-middle" transform="rotate(67.5 24 24)"/>
-        <use href="#mandala-dot-middle" transform="rotate(112.5 24 24)"/>
-        <use href="#mandala-dot-middle" transform="rotate(157.5 24 24)"/>
-        <use href="#mandala-dot-middle" transform="rotate(202.5 24 24)"/>
-        <use href="#mandala-dot-middle" transform="rotate(247.5 24 24)"/>
-        <use href="#mandala-dot-middle" transform="rotate(292.5 24 24)"/>
-        <use href="#mandala-dot-middle" transform="rotate(337.5 24 24)"/>
-      </g>
-      <g fill="var(--color-ornament)">
-        <use href="#mandala-dot-inner"/>
-        <use href="#mandala-dot-inner" transform="rotate(45 24 24)"/>
-        <use href="#mandala-dot-inner" transform="rotate(90 24 24)"/>
-        <use href="#mandala-dot-inner" transform="rotate(135 24 24)"/>
-        <use href="#mandala-dot-inner" transform="rotate(180 24 24)"/>
-        <use href="#mandala-dot-inner" transform="rotate(225 24 24)"/>
-        <use href="#mandala-dot-inner" transform="rotate(270 24 24)"/>
-        <use href="#mandala-dot-inner" transform="rotate(315 24 24)"/>
-      </g>
-      <circle cx="24" cy="24" r="3.5" fill="var(--color-ornament-tertiary)"/>
-    </svg>
+    <img class="intro__ornament" src="/assets/images/mandala.png" alt="" aria-hidden="true">
   </section>
   {%- if collections.featuredPosts.size > 0 -%}
   <section class="recent-posts">

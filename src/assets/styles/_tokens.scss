@@ -41,16 +41,6 @@ $tokens: (
   --color-code-bg: #f4f5f7;
   --color-code-text: #1a1d23;
   --color-shadow: rgb(20 22 26 / 8%);
-
-  // The one deliberate exception to the monochrome rule above: a traditional rangoli festival
-  // palette for the homepage's mandala ornament only (src/_pages/index.liquid) — turmeric yellow
-  // for the inner ring, rani pink for the middle ring, saffron for the outer ring, deep maroon-red
-  // for the center. A classic Indian floral color combination, kept to this one small ornament so
-  // it doesn't compete with the rest of the site's restraint.
-  --color-ornament: #e8b923;
-  --color-ornament-secondary: #d1477a;
-  --color-ornament-tertiary: #a52439;
-  --color-ornament-quaternary: #e8821e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -65,10 +55,6 @@ $tokens: (
     --color-code-bg: #1b1e25;
     --color-code-text: #e7e9ec;
     --color-shadow: rgb(0 0 0 / 40%);
-    --color-ornament: #f0c94a;
-    --color-ornament-secondary: #e0629a;
-    --color-ornament-tertiary: #c0435a;
-    --color-ornament-quaternary: #f2953f;
   }
 }
 
@@ -83,8 +69,4 @@ $tokens: (
   --color-code-bg: #1b1e25;
   --color-code-text: #e7e9ec;
   --color-shadow: rgb(0 0 0 / 40%);
-  --color-ornament: #f0c94a;
-  --color-ornament-secondary: #e0629a;
-  --color-ornament-tertiary: #c0435a;
-  --color-ornament-quaternary: #f2953f;
 }
