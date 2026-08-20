@@ -4,6 +4,9 @@ export default {
   tagline: 'Thoughts, experiences, and everything in between.',
   author: 'Senthil Nayagan',
   email: 'hello@zupday.com',
+  // Shown on the About page's "contact me" line only — general site correspondence (footer,
+  // privacy policy, draft feedback) uses `email` above instead.
+  authorEmail: 'author@zupday.com',
   description:
     "Zupday — what I went through, so you don't have to guess. Personal encounters, reviews, opinions, and life lessons from Senthil Nayagan.",
   keywords: ['Zupday', 'personal blog', 'opinion', 'life lessons', 'reviews', 'Senthil Nayagan'],

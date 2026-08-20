@@ -32,4 +32,4 @@ They worked well enough—until ads, pop-ups, and "subscribe to keep reading" st
 </div>
 </div>
 
-I read everything that lands in my inbox, even if I'm slow to reply. You can find me at: [{{ site.email }}](mailto:{{ site.email }}).
+I read everything that lands in my inbox, even if I'm slow to reply. You can find me at: [{{ site.authorEmail }}](mailto:{{ site.authorEmail }}).
